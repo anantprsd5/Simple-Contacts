@@ -10,7 +10,6 @@ import com.pratilipi.contacts.Model.Contacts;
 import com.pratilipi.contacts.R;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,14 +18,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     private Context context;
     private ArrayList<Contacts> contactsList;
-    private Random random;
+
+    private int drawableCount=0;
 
     int[] drawable = {R.drawable.circular_text_blue, R.drawable.circular_text_green,
     R.drawable.circular_text_pink, R.drawable.circular_text_red};
 
     public ContactsAdapter(ArrayList<Contacts> contactsList) {
         this.contactsList = contactsList;
-        random = new Random();
     }
 
     @Override
@@ -42,12 +41,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         String name = contactsList.get(position).getName();
         holder.textView.setText(name);
         holder.indicatorTextView.setText(name.substring(0,1));
-        int n = random.nextInt(3);
         final int sdk = android.os.Build.VERSION.SDK_INT;
+        if(drawableCount==4){
+            drawableCount=0;
+        }
         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            holder.indicatorTextView.setBackgroundDrawable(ContextCompat.getDrawable(context, drawable[n]) );
+            holder.indicatorTextView.setBackgroundDrawable(ContextCompat.getDrawable(context, drawable[drawableCount++]) );
         } else {
-            holder.indicatorTextView.setBackground(ContextCompat.getDrawable(context, drawable[n]));
+            holder.indicatorTextView.setBackground(ContextCompat.getDrawable(context, drawable[drawableCount++]));
         }
     }
 

@@ -22,13 +22,13 @@ public class MainActivityPresenter implements ContactsHelper.contactsFetched {
         this.mainView = mainView;
     }
 
-    public void getContacts(){
-        contactsHelper.getContacts();
+    public void getContacts(int position){
+        contactsHelper.getContacts(position);
     }
 
     @Override
-    public void onContactsFetched(ArrayList<Contacts> contactsArrayList) {
+    public void onContactsFetched(ArrayList<Contacts> contactsArrayList, int count) {
         Log.wtf("abcdef", ","+contactsArrayList.size());
-        mainView.onContactsFetched(contactsArrayList);
+        mainView.onContactsFetched(contactsArrayList, count);
     }
 }

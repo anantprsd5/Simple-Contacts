@@ -20,26 +20,32 @@ public class ContactsHelper {
         this.contactsFetched = contactsFetched;
     }
 
-    public void getContacts() {
-        new ContactLoader().execute();
+    public void getContacts(int position) {
+        new ContactLoader().execute(position);
     }
 
-    private class ContactLoader extends AsyncTask<Void, Void, Void>
+    private class ContactLoader extends AsyncTask<Integer, Void, Void>
     {
+
+        private int count;
+        int position;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            count = 0;
         }
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Integer... params) {
 
             //this method will be running on background thread so don't update UI frome here
             //do your long running http tasks here,you dont want to pass argument and u can access the parent class' variable url over here
             ContentResolver contentResolver = context.getContentResolver();
             Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME +  " ASC");
+            position = params[0];
             if (cursor.getCount() > 0) {
-                while (cursor.moveToNext()) {
+                cursor.moveToPosition(position-1);
+                while (cursor.moveToNext() && count<100) {
                     String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                     if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
                         Cursor cursorInfo = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
@@ -56,6 +62,7 @@ public class ContactsHelper {
 
                         cursorInfo.close();
                     }
+                    count++;
                 }
                 cursor.close();
             }
@@ -67,17 +74,13 @@ public class ContactsHelper {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-
-            //this method will be running on UI thread
-
-            Log.wtf("abcd", "pass");
-            contactsFetched.onContactsFetched(contactsArrayList);
+            contactsFetched.onContactsFetched(contactsArrayList, position+ count);
         }
 
     }
 
     public interface contactsFetched {
-        void onContactsFetched(ArrayList<Contacts> contactsArrayList);
+        void onContactsFetched(ArrayList<Contacts> contactsArrayList, int position);
     }
 
 }
