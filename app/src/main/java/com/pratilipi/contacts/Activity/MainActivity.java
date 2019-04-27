@@ -39,14 +39,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(eLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(contactsAdapter);
 
     }
 
     @Override
     public void onContactsFetched(ArrayList<Contacts> contactsArrayList) {
-        if(contactsAdapter==null)
+        if(contactsAdapter==null) {
             contactsAdapter = new ContactsAdapter(contactsArrayList);
+            recyclerView.setAdapter(contactsAdapter);
+        }
         else {
             contactsAdapter.setDataset(contactsArrayList);
             contactsAdapter.notifyDataSetChanged();
