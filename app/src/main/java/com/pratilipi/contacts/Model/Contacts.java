@@ -1,11 +1,14 @@
 package com.pratilipi.contacts.Model;
 
+import android.graphics.Bitmap;
+
 public class Contacts {
 
     public String name;
     public String email;
     public  String id;
     public String number;
+    public Bitmap bitmap;
 
     public String getName() {
         return name;

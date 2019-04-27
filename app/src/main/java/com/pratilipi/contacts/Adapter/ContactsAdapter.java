@@ -10,16 +10,23 @@ import com.pratilipi.contacts.Model.Contacts;
 import com.pratilipi.contacts.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder> {
 
     private Context context;
     private ArrayList<Contacts> contactsList;
+    private Random random;
+
+    int[] drawable = {R.drawable.circular_text_blue, R.drawable.circular_text_green,
+    R.drawable.circular_text_pink, R.drawable.circular_text_red};
 
     public ContactsAdapter(ArrayList<Contacts> contactsList) {
         this.contactsList = contactsList;
+        random = new Random();
     }
 
     @Override
@@ -34,6 +41,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
     public void onBindViewHolder(ContactsViewHolder holder, final int position) {
         String name = contactsList.get(position).getName();
         holder.textView.setText(name);
+        holder.indicatorTextView.setText(name.substring(0,1));
+        int n = random.nextInt(3);
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            holder.indicatorTextView.setBackgroundDrawable(ContextCompat.getDrawable(context, drawable[n]) );
+        } else {
+            holder.indicatorTextView.setBackground(ContextCompat.getDrawable(context, drawable[n]));
+        }
     }
 
     @Override
@@ -46,13 +61,19 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         return position;
     }
 
+    public void setDataset(ArrayList<Contacts> contactsList) {
+        this.contactsList = contactsList;
+    }
+
     public class ContactsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView textView;
+        public TextView indicatorTextView;
 
         public ContactsViewHolder(View v) {
             super(v);
-            textView = v.findViewById(R.id.test_text);
+            textView = v.findViewById(R.id.name_text_view);
+            indicatorTextView = v.findViewById(R.id.indicator_text_view);
 
         }
 

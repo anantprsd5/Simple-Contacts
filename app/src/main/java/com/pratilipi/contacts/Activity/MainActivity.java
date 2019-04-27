@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void onContactsFetched(ArrayList<Contacts> contactsArrayList) {
-        contactsAdapter = new ContactsAdapter(contactsArrayList);
+        if(contactsAdapter==null)
+            contactsAdapter = new ContactsAdapter(contactsArrayList);
+        else {
+            contactsAdapter.setDataset(contactsArrayList);
+            contactsAdapter.notifyDataSetChanged();
+        }
     }
 }
