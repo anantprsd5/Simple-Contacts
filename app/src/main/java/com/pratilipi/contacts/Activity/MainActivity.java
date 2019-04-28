@@ -1,6 +1,7 @@
 package com.pratilipi.contacts.Activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.pratilipi.contacts.Adapter.ContactsAdapter;
 import com.pratilipi.contacts.Model.Contacts;
@@ -51,36 +52,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
         if(contactsAdapter==null) {
             contactsAdapter = new ContactsAdapter(contactsArrayList);
             recyclerView.setAdapter(contactsAdapter);
-            initScrollListener();
         }
         else {
             contactsAdapter.setDataset(contactsArrayList);
             contactsAdapter.notifyDataSetChanged();
         }
+        if(count%100==0){
+            Log.wtf("mainCount", ",,"+count);
+            mainActivityPresenter.getContacts(count);
+        }
     }
 
-    public void initScrollListener() {
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
 
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-
-                    int visibleItemCount = layoutManager.getChildCount();
-                    int totalItemCount = layoutManager.getItemCount();
-                    int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount-50 && firstVisibleItemPosition >= 0) {
-                        //bottom of list!
-                        if(count%100==0){
-                            mainActivityPresenter.getContacts(count);
-                        }
-                    }
-            }
-        });
-    }
 }

@@ -42,13 +42,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         holder.textView.setText(name);
         holder.indicatorTextView.setText(name.substring(0,1));
         final int sdk = android.os.Build.VERSION.SDK_INT;
-        if(drawableCount==4){
-            drawableCount=0;
-        }
+        int pos;
+        if(position>3){
+            pos = position%4;
+        } else pos = position;
         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            holder.indicatorTextView.setBackgroundDrawable(ContextCompat.getDrawable(context, drawable[drawableCount++]) );
+            holder.indicatorTextView.setBackgroundDrawable(ContextCompat.getDrawable(context, drawable[pos]) );
         } else {
-            holder.indicatorTextView.setBackground(ContextCompat.getDrawable(context, drawable[drawableCount++]));
+            holder.indicatorTextView.setBackground(ContextCompat.getDrawable(context, drawable[pos]));
         }
     }
 
