@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/anant"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Anant Prasad"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:layout_margin="12dp" />
+
+    <View android:background="#ffffff"
+        android:layout_width = "match_parent"
+        android:layout_height="0.5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="12dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_phone_black_24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:text="+917012415845"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile"
+                android:layout_marginLeft="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <View android:background="#ffffff"
+                android:layout_width = "match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="12dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_email_black_24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:text="anantprsd5@gmail.com"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <View android:background="#ffffff"
+                android:layout_width = "match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="12dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_location_on_black_24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="12dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:text="Kerala, India"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:layout_marginLeft="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <View android:background="#ffffff"
+                android:layout_width = "match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

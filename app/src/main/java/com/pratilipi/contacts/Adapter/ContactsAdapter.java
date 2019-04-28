@@ -8,9 +8,12 @@ import android.widget.TextView;
 
 import com.pratilipi.contacts.Model.Contacts;
 import com.pratilipi.contacts.R;
+import com.pratilipi.contacts.View.MainView;
 
 import java.util.ArrayList;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,14 +21,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
     private Context context;
     private ArrayList<Contacts> contactsList;
-
-    private int drawableCount=0;
+    private MainView mainView;
 
     int[] drawable = {R.drawable.circular_text_blue, R.drawable.circular_text_green,
     R.drawable.circular_text_pink, R.drawable.circular_text_red};
 
-    public ContactsAdapter(ArrayList<Contacts> contactsList) {
+    public ContactsAdapter(ArrayList<Contacts> contactsList, MainView mainView) {
         this.contactsList = contactsList;
+        this.mainView = mainView;
     }
 
     @Override
@@ -71,17 +74,19 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
         public TextView textView;
         public TextView indicatorTextView;
+        public ConstraintLayout contactsLayout;
 
         public ContactsViewHolder(View v) {
             super(v);
             textView = v.findViewById(R.id.name_text_view);
             indicatorTextView = v.findViewById(R.id.indicator_text_view);
-
+            contactsLayout = v.findViewById(R.id.contacts_layout);
+            contactsLayout.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-
+            mainView.onContactsItemClicked(0);
         }
     }
 }
