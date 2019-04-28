@@ -1,7 +1,6 @@
 package com.pratilipi.contacts.Presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.pratilipi.contacts.Model.Contacts;
 import com.pratilipi.contacts.Model.ContactsHelper;
@@ -28,7 +27,6 @@ public class MainActivityPresenter implements ContactsHelper.contactsFetched {
 
     @Override
     public void onContactsFetched(ArrayList<Contacts> contactsArrayList, int count) {
-        Log.wtf("abcdef", ","+contactsArrayList.size());
         mainView.onContactsFetched(contactsArrayList, count);
     }
 }

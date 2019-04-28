@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public class ContactsHelper {
             ContentResolver contentResolver = context.getContentResolver();
             Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME +  " ASC");
             position = params[0];
-            Log.wtf("testabc", "+"+position);
+
             if (cursor.getCount() > 0) {
                 cursor.moveToPosition(position-1);
                 while (cursor.moveToNext() && count<100) {
@@ -67,7 +66,6 @@ public class ContactsHelper {
                 }
                 cursor.close();
             }
-
 
             return null;
         }

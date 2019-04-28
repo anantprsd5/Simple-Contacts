@@ -8,5 +8,5 @@ public interface MainView {
 
     void onContactsFetched(ArrayList<Contacts> contactsArrayList, int count);
 
-    void onContactsItemClicked(int id);
+    void onContactsItemClicked(Contacts contacts);
 }

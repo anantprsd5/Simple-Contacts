@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void onContactsItemClicked(int id) {
+    public void onContactsItemClicked(Contacts contacts) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("contactsDetails", contacts);
         startActivity(intent);
     }
 

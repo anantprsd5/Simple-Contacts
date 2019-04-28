@@ -1,14 +1,12 @@
 package com.pratilipi.contacts.Model;
 
-import android.graphics.Bitmap;
+import java.io.Serializable;
 
-public class Contacts {
+public class Contacts implements Serializable {
 
     public String name;
-    public String email;
     public  String id;
     public String number;
-    public Bitmap bitmap;
 
     public String getName() {
         return name;
@@ -16,14 +14,6 @@ public class Contacts {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getId() {

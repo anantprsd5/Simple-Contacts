@@ -13,7 +13,6 @@ import com.pratilipi.contacts.View.MainView;
 import java.util.ArrayList;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,7 +85,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
 
         @Override
         public void onClick(View v) {
-            mainView.onContactsItemClicked(0);
+            mainView.onContactsItemClicked(contactsList.get(getAdapterPosition()));
         }
     }
 }
