@@ -4,4 +4,7 @@
     <string name="contact_deleted">Contact Deleted, Refreshing list</string>
     <string name="no_email">No Email found</string>
     <string name="no_address">No Address found</string>
+    <string name="email">Email</string>
+    <string name="location">Location</string>
+    <string name="mobile">Mobile</string>
 </resources>

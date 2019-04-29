@@ -1,9 +1,12 @@
 package com.pratilipi.contacts.Activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pratilipi.contacts.Model.Contacts;
@@ -38,6 +41,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     ImageView contactImage;
     @BindView(R.id.indicator_text_view)
     TextView indicatorTextView;
+    @BindView(R.id.phone_layout)
+    LinearLayout linearLayout;
 
     private Contacts contact;
 
@@ -62,6 +67,13 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         detailActivityPresenter.getContactImage(Long.parseLong(contact.getId()));
         detailActivityPresenter.getContactEmail(contact.getId());
         detailActivityPresenter.getContactAddress(contact.getId());
+
+        linearLayout.setOnClickListener(v -> {
+            if(contact.getNumber().length()!=0){
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", contact.getNumber(), null));
+                startActivity(intent);
+            }
+        });
 
     }
 
