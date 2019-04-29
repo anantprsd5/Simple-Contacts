@@ -7,4 +7,5 @@
     <string name="email">Email</string>
     <string name="location">Location</string>
     <string name="mobile">Mobile</string>
+    <string name="permission_required">This app needs your read contacts permission</string>
 </resources>
