@@ -21,12 +21,23 @@ public class MainActivityPresenter implements ContactsHelper.contactsFetched {
         this.mainView = mainView;
     }
 
-    public void getContacts(int position){
-        contactsHelper.getContacts(position);
+    public void getContacts(int position, boolean isChanged){
+        contactsHelper.getContacts(position, isChanged);
+    }
+
+    public void checkIfNewContactAdded(){
+        contactsHelper.checkIfNewContactAdded();
     }
 
     @Override
     public void onContactsFetched(ArrayList<Contacts> contactsArrayList, int count) {
         mainView.onContactsFetched(contactsArrayList, count);
     }
+
+    @Override
+    public void ifContactsDataChanged(String message) {
+        mainView.onContactsCountChanged(message);
+    }
+
+
 }

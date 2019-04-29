@@ -2,6 +2,7 @@ package com.pratilipi.contacts.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.pratilipi.contacts.Adapter.ContactsAdapter;
 import com.pratilipi.contacts.Model.Contacts;
@@ -16,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.swiperefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    private boolean isChanged = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +48,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("My Contacts");
 
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(false);
+
         mainActivityPresenter = new MainActivityPresenter(this, this);
-        mainActivityPresenter.getContacts(0);
+        mainActivityPresenter.getContacts(0, isChanged);
 
         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(eLayoutManager);
@@ -63,7 +73,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         //Lazy loading of cursor data to improve performance
         if(count%100==0){
-            mainActivityPresenter.getContacts(count);
+            mainActivityPresenter.getContacts(count, isChanged);
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
         }
     }
 
@@ -74,5 +86,19 @@ public class MainActivity extends AppCompatActivity implements MainView {
         startActivity(intent);
     }
 
+    @Override
+    public void onContactsCountChanged(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        isChanged = true;
+        mainActivityPresenter.getContacts(0, isChanged);
+        isChanged = false;
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainActivityPresenter.checkIfNewContactAdded();
+    }
 
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -13,14 +14,31 @@ public class ContactsHelper {
     private Context context;
     private ArrayList<Contacts> contactsArrayList = new ArrayList<>();
     private contactsFetched contactsFetched;
+    private Integer cursorCount = null;
 
     public ContactsHelper(Context context, contactsFetched contactsFetched) {
         this.context = context;
         this.contactsFetched = contactsFetched;
     }
 
-    public void getContacts(int position) {
+    public void getContacts(int position, boolean changed) {
         new ContactLoader().execute(position);
+        if(changed){
+            contactsArrayList = new ArrayList<>();
+        }
+    }
+
+    public void checkIfNewContactAdded(){
+        ContentResolver contentResolver = context.getContentResolver();
+        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME +  " ASC");
+        if(cursorCount!=null){
+            if(cursor.getCount()>cursorCount){
+                Toast.makeText(context, "New added", Toast.LENGTH_SHORT).show();
+                contactsFetched.ifContactsDataChanged("New Contact Added, Refreshing list");
+            } else if(cursor.getCount()<cursorCount){
+                contactsFetched.ifContactsDataChanged("Contact Deleted, Refreshing list");
+            }
+        }
     }
 
     private class ContactLoader extends AsyncTask<Integer, Void, Void>
@@ -28,6 +46,7 @@ public class ContactsHelper {
 
         private int count;
         int position;
+        private Cursor cursor;
 
         @Override
         protected void onPreExecute() {
@@ -40,7 +59,7 @@ public class ContactsHelper {
             //this method will be running on background thread so don't update UI frome here
             //do your long running http tasks here,you dont want to pass argument and u can access the parent class' variable url over here
             ContentResolver contentResolver = context.getContentResolver();
-            Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME +  " ASC");
+            cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME +  " ASC");
             position = params[0];
 
             if (cursor.getCount() > 0) {
@@ -64,6 +83,7 @@ public class ContactsHelper {
                     }
                     count++;
                 }
+                cursorCount = cursor.getCount();
                 cursor.close();
             }
 
@@ -80,6 +100,7 @@ public class ContactsHelper {
 
     public interface contactsFetched {
         void onContactsFetched(ArrayList<Contacts> contactsArrayList, int position);
+        void ifContactsDataChanged(String message);
     }
 
 }
