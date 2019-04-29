@@ -20,18 +20,18 @@
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="center"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="@dimen/expandedTitleMarginEnd"
+            app:expandedTitleMarginStart="@dimen/expanded_title_margin_start"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleEnabled="false">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/toolbar_height"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:titleMarginStart="16dp"
+                app:titleMarginStart="@dimen/title_margin_start"
                 app:titleTextColor="@android:color/white">
 
             </androidx.appcompat.widget.Toolbar>

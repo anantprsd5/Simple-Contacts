@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="expanded_title_margin_start">48dp</dimen>
+    <dimen name="expandedTitleMarginEnd">64dp</dimen>
+    <dimen name="image_height">250dp</dimen>
+    <dimen name="indicator_text_width">120dp</dimen>
+    <dimen name="indicator_text_height">120dp</dimen>
+    <dimen name="indicator_text_size">50sp</dimen>
+    <dimen name="text_field_margin">12dp</dimen>
+    <dimen name="text_field_size">30sp</dimen>
+    <dimen name="item_image_size">30dp</dimen>
+    <dimen name="toolbar_height">60dp</dimen>
+    <dimen name="title_margin_start">16dp</dimen>
+    <dimen name="constraint_margin_left">8dp</dimen>
+    <dimen name="text_layout_size">40dp</dimen>
+    <dimen name="text_margin">8dp</dimen>
+    <dimen name="main_text_size">25sp</dimen>
+    <dimen name="text_margin_top">13dp</dimen>
+    <dimen name="name_text_size">18sp</dimen>
+</resources>

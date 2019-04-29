@@ -10,13 +10,11 @@ import java.util.ArrayList;
 
 public class MainActivityPresenter implements ContactsHelper.contactsFetched {
 
-    private Context context;
     private ContactsHelper contactsHelper;
 
     private MainView mainView;
 
     public MainActivityPresenter(Context context, MainView mainView){
-        this.context = context;
         contactsHelper = new ContactsHelper(context, this);
         this.mainView = mainView;
     }

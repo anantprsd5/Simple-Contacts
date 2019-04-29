@@ -5,7 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
-import android.widget.Toast;
+
+import com.pratilipi.contacts.R;
 
 import java.util.ArrayList;
 
@@ -33,10 +34,9 @@ public class ContactsHelper {
         Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME +  " ASC");
         if(cursorCount!=null){
             if(cursor.getCount()>cursorCount){
-                Toast.makeText(context, "New added", Toast.LENGTH_SHORT).show();
-                contactsFetched.ifContactsDataChanged("New Contact Added, Refreshing list");
+                contactsFetched.ifContactsDataChanged(context.getString(R.string.new_contact_added));
             } else if(cursor.getCount()<cursorCount){
-                contactsFetched.ifContactsDataChanged("Contact Deleted, Refreshing list");
+                contactsFetched.ifContactsDataChanged(context.getString(R.string.contact_deleted));
             }
         }
     }

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="new_contact_added">New Contact Added, Refreshing list</string>
+    <string name="contact_deleted">Contact Deleted, Refreshing list</string>
+    <string name="no_email">No Email found</string>
+    <string name="no_address">No Address found</string>
 </resources>

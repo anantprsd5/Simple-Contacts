@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
-    private ArrayList<String> contacts = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
     private ContactsAdapter contactsAdapter;
 

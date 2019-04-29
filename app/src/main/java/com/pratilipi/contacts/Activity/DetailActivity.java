@@ -99,7 +99,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         if(email!=null){
             contactEmail.setText(email);
         } else {
-            contactEmail.setText("No Email found");
+            contactEmail.setText(getString(R.string.no_email));
         }
     }
 
@@ -108,7 +108,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         if(address!=null){
             contactLocation.setText(address);
         } else {
-            contactLocation.setText("No Address found");
+            contactLocation.setText(getString(R.string.no_address));
         }
     }
 }
