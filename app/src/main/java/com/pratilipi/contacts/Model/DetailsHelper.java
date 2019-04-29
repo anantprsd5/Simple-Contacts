@@ -8,7 +8,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class DetailsHelper {
 
@@ -22,23 +23,21 @@ public class DetailsHelper {
 
     public void getContactImage(long contactId){
         Bitmap bitmap = null;
-        Uri contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId);
-        Uri photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
-        Cursor cursor = context.getContentResolver().query(photoUri,
-                new String[] {ContactsContract.Contacts.Photo.PHOTO}, null, null, null);
-        if (cursor == null) {
-            bitmap = null;
-            return;
-        }
+
         try {
-            if (cursor.moveToFirst()) {
-                byte[] data = cursor.getBlob(0);
-                if (data != null) {
-                    bitmap =  BitmapFactory.decodeStream(new ByteArrayInputStream(data));
-                }
+            InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(context.getContentResolver(),
+                    ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId));
+
+            if (inputStream != null) {
+                bitmap = BitmapFactory.decodeStream(inputStream);
             }
-        } finally {
-            cursor.close();
+
+            assert inputStream != null;
+            if(inputStream!=null)
+                inputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         imageDetails.onImageBitmapFetched(bitmap);
